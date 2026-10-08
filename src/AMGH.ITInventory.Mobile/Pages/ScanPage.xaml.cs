@@ -9,7 +9,7 @@ public partial class ScanPage : ContentPage
     public ScanPage(ScanViewModel vm)
     {
         InitializeComponent(); BindingContext = _vm = vm;
-        Reader.Options = new BarcodeReaderOptions { Formats = BarcodeFormats.TwoDimensional | BarcodeFormats.Code128, AutoRotate = true, Multiple = false };
+        Reader.Options = new BarcodeReaderOptions { Formats = BarcodeFormats.All, AutoRotate = true, Multiple = false };
     }
 
     private void OnBarcodesDetected(object? sender, BarcodeDetectionEventArgs e)
