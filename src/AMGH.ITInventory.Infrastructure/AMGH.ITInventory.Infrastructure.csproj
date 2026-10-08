@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\AMGH.ITInventory.Application\AMGH.ITInventory.Application.csproj" />
+    <ProjectReference Include="..\AMGH.ITInventory.Domain\AMGH.ITInventory.Domain.csproj" />
+    <ProjectReference Include="..\AMGH.ITInventory.Notifications\AMGH.ITInventory.Notifications.csproj" />
+    <ProjectReference Include="..\AMGH.ITInventory.QRCode\AMGH.ITInventory.QRCode.csproj" />
+    <ProjectReference Include="..\AMGH.ITInventory.Reporting\AMGH.ITInventory.Reporting.csproj" />
+    <ProjectReference Include="..\AMGH.ITInventory.Security\AMGH.ITInventory.Security.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Lextm.SharpSnmpLib" Version="12.5.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
