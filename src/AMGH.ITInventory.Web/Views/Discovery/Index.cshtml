@@ -1,0 +1,12 @@
+@model AMGH.ITInventory.Web.ViewModels.DiscoveryViewModel
+@{ ViewData["Title"] = "Network discovery"; }
+<h2>Network discovery</h2>
+<form asp-action="Index" method="post" class="row g-2 mb-3" style="max-width:600px">
+  <div class="col"><input asp-for="Cidr" class="form-control" placeholder="10.0.0.0/24" /><span asp-validation-for="Cidr" class="text-danger"></span></div>
+  <div class="col-auto"><button class="btn btn-primary">Scan</button></div>
+</form>
+@if (Model.Results is not null) {
+ <table class="table table-sm table-striped"><thead><tr><th>IP</th><th>Host</th><th>Type</th><th>Open ports</th><th>RTT</th><th>SNMP</th></tr></thead><tbody>
+ @foreach (var d in Model.Results) { <tr><td>@d.IpAddress</td><td>@d.HostName</td><td>@d.DeviceType</td><td>@string.Join(", ", d.OpenPorts)</td><td>@d.RoundTripMs ms</td><td>@d.SnmpDescription</td></tr> }
+ </tbody></table>
+}

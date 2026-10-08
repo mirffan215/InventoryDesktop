@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMGH.ITInventory.Web", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMGH.ITInventory.Mobile", "src\AMGH.ITInventory.Mobile\AMGH.ITInventory.Mobile.csproj", "{C70F34D0-A534-4E5C-9C8A-C92F181085E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMGH.ITInventory.Desktop", "src\AMGH.ITInventory.Desktop\AMGH.ITInventory.Desktop.csproj", "{E538ED84-A308-4808-AFE5-D07CAB204FDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,10 @@ Global
 		{C70F34D0-A534-4E5C-9C8A-C92F181085E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C70F34D0-A534-4E5C-9C8A-C92F181085E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C70F34D0-A534-4E5C-9C8A-C92F181085E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E538ED84-A308-4808-AFE5-D07CAB204FDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E538ED84-A308-4808-AFE5-D07CAB204FDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E538ED84-A308-4808-AFE5-D07CAB204FDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E538ED84-A308-4808-AFE5-D07CAB204FDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1E44E6FD-92B9-4FA2-99FF-2E50C44130F6} = {13B06579-E6F5-4815-A0EA-D34675FC7628}

@@ -1,0 +1,11 @@
+@model AMGH.ITInventory.Domain.Entities.VerificationCampaign
+@{ ViewData["Title"] = Model.Name; }
+<div class="d-flex justify-content-between"><h2>@Model.Name <span class="badge bg-secondary">@Model.Status</span></h2>
+ <div>
+  @if (Model.Status == AMGH.ITInventory.Shared.Enums.CampaignStatus.Draft) { <form asp-action="Activate" asp-route-id="@Model.Id" method="post" class="d-inline"><button class="btn btn-success">Activate</button></form> }
+  <a class="btn btn-outline-primary" asp-action="Report" asp-route-id="@Model.Id">Export Excel</a>
+ </div></div>
+<table id="items" class="table table-sm table-striped w-100"><thead><tr><th>Tag</th><th>Asset</th><th>Result</th><th>By</th><th>When (UTC)</th><th>Comment</th></tr></thead><tbody>
+@foreach (var i in Model.Items) { <tr><td>@i.Asset?.AssetTag</td><td>@i.Asset?.Name</td><td>@i.Result</td><td>@i.VerifiedBy</td><td>@i.VerifiedAtUtc?.ToString("u")</td><td>@i.Comment</td></tr> }
+</tbody></table>
+@section Scripts { <script>$('#items').DataTable({ pageLength: 25 });</script> }

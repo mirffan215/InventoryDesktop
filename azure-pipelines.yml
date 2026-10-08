@@ -1,0 +1,15 @@
+trigger: [ main ]
+pool: { vmImage: ubuntu-latest }
+steps:
+  - task: UseDotNet@2
+    inputs: { version: 8.0.x }
+  - script: dotnet build AMGH.ITInventory.Server.slnf -c Release
+    displayName: Build
+  - script: dotnet test AMGH.ITInventory.Server.slnf -c Release --no-build --logger trx --collect:"XPlat Code Coverage"
+    displayName: Test
+  - task: PublishTestResults@2
+    inputs: { testResultsFormat: VSTest, testResultsFiles: '**/*.trx' }
+  - script: dotnet publish src/AMGH.ITInventory.API -c Release -o $(Build.ArtifactStagingDirectory)/api
+  - script: dotnet publish src/AMGH.ITInventory.Web -c Release -o $(Build.ArtifactStagingDirectory)/web
+  - task: PublishBuildArtifacts@1
+    inputs: { PathtoPublish: $(Build.ArtifactStagingDirectory), ArtifactName: drop }

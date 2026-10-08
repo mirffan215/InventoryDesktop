@@ -1,0 +1,10 @@
+@model IEnumerable<AMGH.ITInventory.Shared.Contracts.CampaignDto>
+@{ ViewData["Title"] = "Verification campaigns"; }
+<div class="d-flex justify-content-between mb-3"><h2>Verification campaigns</h2><a class="btn btn-primary" asp-action="Create">New campaign</a></div>
+<table class="table table-striped"><thead><tr><th>Name</th><th>Period</th><th>Status</th><th>Progress</th><th></th></tr></thead><tbody>
+@foreach (var c in Model) {
+  var pct = c.TotalAssets == 0 ? 0 : c.VerifiedAssets * 100 / c.TotalAssets;
+  <tr><td>@c.Name</td><td>@c.StartDate.ToString("yyyy-MM-dd") - @c.EndDate.ToString("yyyy-MM-dd")</td><td>@c.Status</td>
+      <td style="min-width:200px"><div class="progress"><div class="progress-bar" style="width:@pct%">@c.VerifiedAssets / @c.TotalAssets</div></div></td>
+      <td><a asp-action="Details" asp-route-id="@c.Id">Open</a></td></tr>
+}</tbody></table>

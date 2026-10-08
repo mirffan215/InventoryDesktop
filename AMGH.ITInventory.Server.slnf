@@ -1,0 +1,7 @@
+{ "solution": { "path": "AMGH.ITInventory.sln", "projects": [
+  "src\\AMGH.ITInventory.API\\AMGH.ITInventory.API.csproj","src\\AMGH.ITInventory.Application\\AMGH.ITInventory.Application.csproj",
+  "src\\AMGH.ITInventory.Domain\\AMGH.ITInventory.Domain.csproj","src\\AMGH.ITInventory.Infrastructure\\AMGH.ITInventory.Infrastructure.csproj",
+  "src\\AMGH.ITInventory.Notifications\\AMGH.ITInventory.Notifications.csproj","src\\AMGH.ITInventory.Persistence\\AMGH.ITInventory.Persistence.csproj",
+  "src\\AMGH.ITInventory.QRCode\\AMGH.ITInventory.QRCode.csproj","src\\AMGH.ITInventory.Reporting\\AMGH.ITInventory.Reporting.csproj",
+  "src\\AMGH.ITInventory.Security\\AMGH.ITInventory.Security.csproj","src\\AMGH.ITInventory.Shared\\AMGH.ITInventory.Shared.csproj",
+  "src\\AMGH.ITInventory.Tests\\AMGH.ITInventory.Tests.csproj","src\\AMGH.ITInventory.Web\\AMGH.ITInventory.Web.csproj" ] } }

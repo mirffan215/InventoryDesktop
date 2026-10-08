@@ -1,0 +1,28 @@
+name: CI
+on: { push: { branches: [ main, 'claude/**' ] }, pull_request: {} }
+jobs:
+  server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with: { dotnet-version: 8.0.x }
+      - run: dotnet build AMGH.ITInventory.Server.slnf -c Release
+      - run: dotnet test AMGH.ITInventory.Server.slnf -c Release --no-build --collect:"XPlat Code Coverage" --results-directory TestResults
+      - uses: actions/upload-artifact@v4
+        with: { name: coverage, path: TestResults }
+  desktop:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with: { dotnet-version: 8.0.x }
+      - run: dotnet build src/AMGH.ITInventory.Desktop -c Release
+  android:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with: { dotnet-version: 8.0.x }
+      - run: dotnet workload install maui-android
+      - run: dotnet build src/AMGH.ITInventory.Mobile -c Release -f net8.0-android

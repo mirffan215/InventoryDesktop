@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zx="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.Maui.Controls"
+             x:Class="AMGH.ITInventory.Mobile.Pages.ScanPage" Title="Verify assets">
+  <Grid RowDefinitions="Auto,*,Auto,Auto" Padding="12" RowSpacing="8">
+    <Picker Grid.Row="0" Title="Campaign" ItemsSource="{Binding Campaigns}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedCampaign}"/>
+    <zx:CameraBarcodeReaderView Grid.Row="1" x:Name="Reader" IsDetecting="True" BarcodesDetected="OnBarcodesDetected"/>
+    <VerticalStackLayout Grid.Row="2" Spacing="4">
+      <Label Text="{Binding Message}" FontAttributes="Bold"/>
+      <Entry Placeholder="Comment (optional)" Text="{Binding Comment}"/>
+      <Label Text="{Binding Pending, StringFormat='Pending sync: {0}'}"/>
+    </VerticalStackLayout>
+    <HorizontalStackLayout Grid.Row="3" Spacing="12">
+      <Button Text="Photo" Command="{Binding CapturePhotoCommand}"/>
+      <Button Text="Sync" Command="{Binding SyncCommand}"/>
+    </HorizontalStackLayout>
+  </Grid>
+</ContentPage>

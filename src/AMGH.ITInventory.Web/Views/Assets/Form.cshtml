@@ -1,0 +1,16 @@
+@model AMGH.ITInventory.Web.ViewModels.AssetFormViewModel
+@{ ViewData["Title"] = "New asset"; }
+<h2>New asset</h2>
+<form asp-action="Create" method="post" class="row g-3" style="max-width:820px">
+  <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+  <div class="col-md-4"><label asp-for="AssetTag" class="form-label"></label><input asp-for="AssetTag" class="form-control" /><span asp-validation-for="AssetTag" class="text-danger"></span></div>
+  <div class="col-md-8"><label asp-for="Name" class="form-label"></label><input asp-for="Name" class="form-control" /><span asp-validation-for="Name" class="text-danger"></span></div>
+  <div class="col-md-4"><label asp-for="CategoryId" class="form-label">Category</label><select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-select"><option value="">-- select --</option></select><span asp-validation-for="CategoryId" class="text-danger"></span></div>
+  <div class="col-md-4"><label asp-for="DepartmentId" class="form-label">Department</label><select asp-for="DepartmentId" asp-items="ViewBag.Departments" class="form-select"><option value="">--</option></select></div>
+  <div class="col-md-4"><label asp-for="LocationId" class="form-label">Location</label><select asp-for="LocationId" asp-items="ViewBag.Locations" class="form-select"><option value="">--</option></select></div>
+  <div class="col-md-4"><label asp-for="SerialNumber" class="form-label"></label><input asp-for="SerialNumber" class="form-control" /></div>
+  <div class="col-md-4"><label asp-for="Classification" class="form-label"></label><select asp-for="Classification" asp-items="Html.GetEnumSelectList<AMGH.ITInventory.Shared.Enums.SecurityClassification>()" class="form-select"></select></div>
+  <div class="col-md-4"><label asp-for="WarrantyEnd" class="form-label"></label><input asp-for="WarrantyEnd" class="form-control" type="date" /></div>
+  <div class="col-12"><button class="btn btn-primary">Save</button> <a class="btn btn-link" asp-action="Index">Cancel</a></div>
+</form>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

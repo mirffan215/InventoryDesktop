@@ -1,0 +1,21 @@
+@model AMGH.ITInventory.Web.ViewModels.DashboardViewModel
+@{ ViewData["Title"] = "Executive Dashboard"; }
+<h2>Executive Dashboard</h2>
+<div class="row g-3 my-2">
+  @foreach (var (label, value) in new[] { ("Total assets", Model.TotalAssets), ("In use", Model.InUse), ("In stock", Model.InStock), ("In repair", Model.InRepair), ("Warranty expiring (30d)", Model.WarrantyExpiring30), ("Active campaigns", Model.ActiveCampaigns) })
+  {
+    <div class="col-6 col-md-4 col-xl-2"><div class="card shadow-sm"><div class="card-body"><div class="text-muted small">@label</div><div class="fs-3 fw-semibold">@value</div></div></div></div>
+  }
+</div>
+<div class="row g-3">
+  <div class="col-md-6"><div class="card shadow-sm"><div class="card-header">Assets by category</div><div class="card-body"><canvas id="cat"></canvas></div></div></div>
+  <div class="col-md-6"><div class="card shadow-sm"><div class="card-header">Assets by status</div><div class="card-body"><canvas id="st"></canvas></div></div></div>
+</div>
+@section Scripts {
+<script>
+  const cat = @Json.Serialize(Model.ByCategory.Select(x => new { x.Label, x.Count }));
+  const st = @Json.Serialize(Model.ByStatus.Select(x => new { x.Label, x.Count }));
+  new Chart(document.getElementById('cat'), { type: 'bar', data: { labels: cat.map(x => x.label), datasets: [{ label: 'Assets', data: cat.map(x => x.count) }] }, options: { plugins: { legend: { display: false } } } });
+  new Chart(document.getElementById('st'), { type: 'doughnut', data: { labels: st.map(x => x.label), datasets: [{ data: st.map(x => x.count) }] } });
+</script>
+}

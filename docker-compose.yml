@@ -1,0 +1,30 @@
+# Secrets come from .env (not committed). Copy .env.example to .env and set values.
+services:
+  sql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${SA_PASSWORD:?set SA_PASSWORD}
+    volumes: [ "sqldata:/var/opt/mssql" ]
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      retries: 10
+  api:
+    build: { context: ., args: { PROJECT: src/AMGH.ITInventory.API, ENTRY: AMGH.ITInventory.API.dll } }
+    depends_on: { sql: { condition: service_healthy } }
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Production}
+      ConnectionStrings__Default: "Server=sql;Database=AMGH_ITInventory;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=true"
+      Jwt__SigningKey: ${JWT_SIGNING_KEY:?set JWT_SIGNING_KEY (32+ chars)}
+    ports: [ "8080:8080" ]
+  web:
+    build: { context: ., args: { PROJECT: src/AMGH.ITInventory.Web, ENTRY: AMGH.ITInventory.Web.dll } }
+    depends_on: [ api ]
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Production}
+      ConnectionStrings__Default: "Server=sql;Database=AMGH_ITInventory;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=true"
+      AzureAd__TenantId: ${AAD_TENANT_ID:-}
+      AzureAd__ClientId: ${AAD_CLIENT_ID:-}
+    ports: [ "8081:8080" ]
+volumes: { sqldata: {} }
